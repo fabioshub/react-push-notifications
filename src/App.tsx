@@ -1,29 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Button from './components/Buttons/Button';
 import Searchbar from './components/Searchbars/Searchbar';
 import NotificationWrapper from './notifications/NotificationWrapper';
-import Storage from './notifications/Storage';
+// import Storage from './notifications/Storage';
 
-function App() {
+function App(props: any) {
 
-  React.useEffect(() => {
-    console.log(Storage.getCurrentStorage())
-  }, [Storage.Storage])
+  // React.useEffect(() => {
+  //   console.log(Storage.getCurrentStorage())
+  // }, [Storage.Storage])
+
+  console.log(props)
 
   const addNote = (): void => {
-    Storage.add('title', 'message' + Math.random());
+    // Storage.add('title', 'message' + Math.random());
+    props.onIncrement();
   };
 
   const readNotes = (): void => {
-    console.log(Storage.Storage);
+    // console.log(Storage.Storage);
   }
   return (
     <>
-      <Storage.Spawn />
       <div className="App">
-        <Button icon={<i className="fas fa-ad"></i>} onClick={addNote}>Register</Button>
+        <Button icon={<i className="fas fa-ad"></i>} onClick={addNote}></Button>
         <Button icon={<i className="fas fa-ad"></i>} variant='light' onClick={readNotes}>Login</Button>
         <Searchbar>hey</Searchbar>
       </div>
@@ -31,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default NotificationWrapper(App);

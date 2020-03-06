@@ -10,21 +10,20 @@ export class Note {
     }
 }
 
-function Storage(): JSX.Element {
-    const add = (title: string, message: string): void => {
+class Storage {
+    Storage: Array<Note> = [];
+    add = (title: string, message: string): void => {
         this.Storage.push(new Note(title, message));
     }
 
-    const Spawn = () => {
+    Spawn = () => {
         console.log(this.Storage)
         return <h1>{this.Storage}</h1>
     }
 
-    const getCurrentStorage = (): Array<Note> => {
+    getCurrentStorage = (): Array<Note> => {
         return this.Storage;
     }
-
-    return this;
 }
 
 export default new Storage();
