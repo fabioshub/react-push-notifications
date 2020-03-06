@@ -1,0 +1,14 @@
+.pc-button {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border: none;
+    padding: 5px 10px 8px;
+    font-weight: bold;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.pc-button-icon {
+    margin-left: 5px;
+}
