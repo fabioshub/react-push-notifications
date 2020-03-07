@@ -1,7 +1,7 @@
 import React from 'react';
 import NotificationWrapper from './NotificationWrapper';
 
-export class Note {
+export class Notification {
     title: string;
     message: string;
     constructor(title: string, message: string) {
@@ -10,20 +10,42 @@ export class Note {
     }
 }
 
+
 class Storage {
-    Storage: Array<Note> = [];
-    add = (title: string, message: string): void => {
-        this.Storage.push(new Note(title, message));
-    }
+    Storage: Array<Notification> = [];
+    Listeners: Array<any> = [];
 
-    Spawn = () => {
-        console.log(this.Storage)
-        return <h1>{this.Storage}</h1>
-    }
+    notifyListeners = (): void => {
+        this.Listeners.forEach((NotifyListener: any) => NotifyListener(this.Storage));
+    };
 
-    getCurrentStorage = (): Array<Note> => {
+    popAndPush = () => {
+        console.log(this.Listeners)
+        this.Storage.pop();
+        this.notifyListeners();
+    };
+
+    setTimer = async () => {
+        await setTimeout(() => this.popAndPush(), 3000);
+    };
+
+    addListener = (listener: any): void => {
+        console.log('added listener', listener)
+        this.Listeners.push(listener);
+    };
+
+    addNotification = (title: string, message: string): void => {
+        this.add(new Notification(title, message));
+        this.notifyListeners();
+    };
+
+    add = (note: Notification): Array<Notification> => {
+        this.Storage.push(note);
+        this.setTimer();
         return this.Storage;
-    }
+    };
+
+
 }
 
 export default new Storage();

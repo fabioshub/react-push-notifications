@@ -3,6 +3,7 @@ import './App.css';
 import Button from './components/Buttons/Button';
 import Searchbar from './components/Searchbars/Searchbar';
 import NotificationWrapper from './notifications/NotificationWrapper';
+import Storage from './notifications/Storage';
 // import Storage from './notifications/Storage';
 
 function App(props: any) {
@@ -15,7 +16,7 @@ function App(props: any) {
 
   const addNote = (): void => {
     // Storage.add('title', 'message' + Math.random());
-    props.onIncrement();
+    Storage.addNotification('title', 'message' + Math.random());
   };
 
   const readNotes = (): void => {
@@ -23,6 +24,7 @@ function App(props: any) {
   }
   return (
     <>
+      <NotificationWrapper />
       <div className="App">
         <Button icon={<i className="fas fa-ad"></i>} onClick={addNote}></Button>
         <Button icon={<i className="fas fa-ad"></i>} variant='light' onClick={readNotes}>Login</Button>
@@ -32,4 +34,4 @@ function App(props: any) {
   );
 }
 
-export default NotificationWrapper(App);
+export default App;
